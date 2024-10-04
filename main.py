@@ -17,12 +17,12 @@ def index():
 
 @app.route("/createProfile") # for setting up new profile
 def createProfile():
-    return render_template("signUp.html", mode = "creation")
+    return render_template("signUp.html", mode = "Creation")
 
 
 @app.route("/updateProfile") # for updating already existing profile
 def updateProfile():
-    return render_template("signUp.html", mode = "updation")
+    return render_template("signUp.html", mode = "Updation")
 
 
 @app.route("/chat") # LLM chat page
