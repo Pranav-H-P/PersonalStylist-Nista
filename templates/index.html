@@ -4,13 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nista - Home</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='assets/bowTie.png') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css') }}" >
     <script defer src="{{ url_for('static', filename='scripts/index.js') }}" ></script>
+
 </head>
 <body>
 
-    <h1>home page</h1>
-    <a id="signUpLink" href="/createProfile">Set Up Profile!</a>
+    <header>
+        
+        <nav id="topNavBar">
+            <div id="topBarLeft">
+                <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
+                <p id="logoText" class="nistaFont">Nista</p>
+            </div>
+            
+        </nav>
+
+    </header>
+
+    <section id="mainContent">
+
+        <div id="centerContentContainer">
+            <p id="contentHeading" class="nistaFont">Nista</p>
+            <p id="captionText" class="defaultText">Your Personal AI Stylist</p>
+        </div>
+        
+        <div id="contentLinkContainer">
+            <a id="signUpLink" class="hide" href="/createProfile">Set Up Profile!</a>
+            <a id="goToChat" class="hide" href="/chat">Talk to Nista</a>
+        </div>
+        
+    </section>
+
+
 
 </body>
 </html>
