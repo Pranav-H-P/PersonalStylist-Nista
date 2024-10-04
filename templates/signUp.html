@@ -4,13 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nista - Profile</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='assets/bowTie.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/signUp.css') }}" >
+    <script defer src="{{ url_for('static', filename='scripts/signUp.js') }}" ></script>
+
 </head>
 <body>
     
     <!--mode is either creation or updation-->
 
-    <h1>Profile {{ mode }}</h1>
+    <div id="dummyHeader"> <!--A dummy div that occupies the same space as the header 
+        this lets the elements below it stay in its proper place
+        without the need for responsive margins (tedious to do)-->
+        <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
 
+    </div>
+
+    <header>
+        
+        <nav id="topNavBar">
+            <div id="topBarLeft">
+                <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
+                <p id="logoText" class="nistaFont">Nista</p>
+            </div>
+            
+        </nav>
+
+    </header>
+    <section id="mainContent" class="comeFromLeft">
+        <p id="formHeading">Profile {{ mode }}</p>
+        
+        <form id="imgForm" class="inputForm">
+
+            <p class="formLabel"> Upload an image to autofill fields!</p>
+
+            <label for="imgInput" class="inputButton">Upload Image</label>
+            <input id="imgInput" type="file" name="imgInput" accept="image/*"/>
+
+            <p id="imgProcessStatus" class="defaultText">   </p>
+
+        </form>
+
+        <form id="textForm" class="inputForm">
+
+            <label for="nameInput" class="formLabel">Name</label>
+            <input type="text" class="inputBox" name="nameInput" id="nameInput" required>
+            
+            <label for="ageInput" class="formLabel">Age</label>
+            <input type="number" class="inputBox" name="ageInput" id="ageInput" required>
+
+            <label for="genderInput" class="formLabel">Gender</label>
+            <input type="text" class="inputBox" name="genderInput" id="genderInput" required>
+
+            <label for="ethnicityInput" class="formLabel">Ethnicity</label>
+            <input type="text" class="inputBox" name="ethnicityInput" id="ethnicityInput" required>
+
+            <label for="skinInput" class="formLabel">Skin tone</label>
+            <input type="text" class="inputBox" name="skinInput" id="skinInput" required>
+
+            <label for="heightInput" class="formLabel">Height</label>
+            <input type="number" class="inputBox" name="heightInput" id="heightInput" required>
+
+            <label for="sHRInput" class="formLabel">Shoulder to Hip Ratio</label>
+            <input type="number" class="inputBox" name="sHRInput" id="sHRInput" required>
+
+            <label for="wHRInput" class="formLabel">Waist to Height Ratio</label>
+            <input type="number" class="inputBox" name="wHRInput" id="wHRInput" required>
+            
+            <label for="preferencesInput" class="formLabel">Clothing Preferences</label>
+            <textarea id="preferencesInput" class="inputBox" name="preferencesInput" placeholder="Enter your clothing preferences" required></textarea>
+
+            <input type="submit" class="inputButton" value="Register">
+
+        </form>
+        
+        
+    </section>
     
 </body>
 </html>

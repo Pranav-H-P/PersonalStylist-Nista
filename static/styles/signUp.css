@@ -26,16 +26,7 @@
     --nistaLavenderActive: rgb(249, 219, 252);
 }
 
-/*
-color pallete
-blueviolet
-pink
-orange
-lavender
-*/
-
 html{
-
     min-width: 100%;
     min-height: 100%;
     background-repeat: no-repeat;
@@ -80,54 +71,18 @@ header{
     font-size: 4rem;
 }
 
-
-
 #mainContent{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgba(254, 248, 255, 0.464);
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 3%;
-    margin-top: 3%;
-    margin-bottom: 5%;
-}
-
-#centerContentContainer{
-    min-width: 70vw;
-}
-
-#contentHeading{
-    margin-right: 30%;
-    font-size: 15rem;    
-    transition: 1s ease;
-}
-#captionText{
-    
-    font-size: 2rem;
-    text-align: right;
-    padding-right: 20vw;
-    margin-left: auto;
-    transition: 1s ease;
-}
-
-
-#contentLinkContainer{
-    display: flex;
-    justify-content: center;
+    align-items: center;   
+    margin: 20%;
     margin-top: 5%;
-    flex-basis: 20%;
-    width: 100%;
-    height :auto;
-    min-height: 10vh;
     margin-bottom: 5%;
     transition: 1s ease;
-}
-
-a{
-    background-color: var(--nistaLavender);
-    border-radius: 10px;
-    padding: 1%;
-    font-size: 2rem;
-    color: blueviolet;
 }
 
 #dummyHeader{
@@ -135,42 +90,87 @@ a{
     padding: 1%;
 }
 
-.comeFromLeft{
-    
-    opacity: 0;
-    transform: translateX(-25vw);
-}
-
-.comeFromRight{
-    
-    opacity: 0;
-    transform: translateX(25vw);
-}
-.comeFromBottom{
-    
-    opacity: 0;
-    transform: translateY(5vh);
-}
 
 
-a:link{
-    text-decoration: none;
+#formHeading{
+    font-size: 3rem;
+}
+
+.inputForm{
+    
+    min-width: 80%;
+    margin-top: 5%;
+    margin-left: 20%;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.formLabel{
+    font-size: 1.75rem;
+    margin: 0.5%;
+    margin-top: 4%;
+}
+
+#imgInput{
+    font-size: 1.75rem;
+    margin: 0.5%;
+    margin-left: 2%;
+    border: none;
+}
+.inputButton{
+    cursor: pointer;
+    text-align: center;
     background-color: var(--nistaLavender);
+    max-width: 40%;
+    height: auto;
+    border-radius: 10px;
+    padding: 1%;
+    border: none;
+    font-size: 1.75rem;
+    color: blueviolet;
+    margin: 3%;
+    margin-left: 2%;
+    margin-bottom: 5%;
 }
-a:visited{
-    background-color: var(--nistaLavender);
-}
-a:hover{
+
+.inputButton:hover{
     cursor: pointer;
     background-color: var(--nistaLavenderHover)
-    
 }
-a:active{
+
+.inputButton:active{
     cursor: pointer;
     background-color: var(--nistaLavenderActive)
+}
+
+.inputBox{
+    font-size: 1.75rem;
+    margin: 0.5%;
+    margin-left: 2%;
+    max-width: 60%;
+    border: none;
+    padding: 1%;
+    border-radius: 10px;
+    background-color: var(--nistaLavender);
     
 }
 
+#imgInput{
+    display: none;
+}
+
+
+.inputBox:focus{
+    
+    outline-color: blueviolet;
+}
+
+#preferencesInput{
+    padding: 1%;
+    max-width: 50%;
+}
 
 .nistaFont{
     font-family: 'Sacramento';
@@ -181,17 +181,31 @@ a:active{
     display: none;
 }
 
-@media (max-width: 700px){
+
+.comeFromLeft{
     
-    #contentHeading{
+    opacity: 0;
+    transform: translateX(-25vw);
+}
+
+@media (max-width: 800px){
+
+    #mainContent{
+        margin-top: 15%;
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+    .inputBox{
+        min-width: 80%;
+    }
+    .inputButton{
+        
+        min-width: 80%;
+    }
+    .inputForm{
+        min-width: 90%;
         margin-top: 5%;
-        margin-right: 30%;
-        font-size: 8rem;    
+        margin-left: 5%;
     }
-    #captionText{
-        font-size: 1.5rem;
-    }
-    a{
-        padding: 2%;
-    }
+
 }

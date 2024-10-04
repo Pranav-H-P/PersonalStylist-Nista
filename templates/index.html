@@ -11,6 +11,13 @@
 </head>
 <body>
 
+    <div id="dummy"> <!--A dummy div that occupies the same space as the header 
+                        this lets the elements below it stay in its proper place
+                        without the need for responsive margins (tedious to do)-->
+                        <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
+                
+    </div>
+
     <header>
         
         <nav id="topNavBar">
@@ -26,11 +33,11 @@
     <section id="mainContent">
 
         <div id="centerContentContainer">
-            <p id="contentHeading" class="nistaFont">Nista</p>
-            <p id="captionText" class="defaultText">Your Personal AI Stylist</p>
+            <p id="contentHeading" class="nistaFont comeFromLeft">Nista</p>
+            <p id="captionText" class="defaultText comeFromRight">Your Personal AI Stylist</p>
         </div>
         
-        <div id="contentLinkContainer">
+        <div id="contentLinkContainer" class="comeFromBottom">
             <a id="signUpLink" class="hide" href="/createProfile">Set Up Profile!</a>
             <a id="goToChat" class="hide" href="/chat">Talk to Nista</a>
         </div>
