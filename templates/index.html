@@ -4,8 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nista - Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/index.css') }}" >
+    <script defer src="{{ url_for('static', filename='scripts/index.js') }}" ></script>
 </head>
 <body>
-    
+
+    <h1>home page</h1>
+    <a id="signUpLink" href="/createProfile">Set Up Profile!</a>
+
 </body>
 </html>
