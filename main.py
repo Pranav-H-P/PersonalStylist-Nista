@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from utility.cv import cvUtils
-
+from utility.llm import llmUtils
 
 
 app = Flask(__name__)
@@ -46,12 +46,19 @@ def processImage():
 
 
     # returns data from the image for pre-filling
+    
     processedImageData = cvUtils.getImageData(image) 
     
     if processedImageData == None: # if processing fails somehow
         return jsonify({
             'error': "The image is not clear! Please use good lighting"
             }), 400
+
+    # skin tone is in rgb value, make it into human readable values
+    # classify skin tone using llm
+    
+    processedImageData['skinTone'] = llmUtils.classifyRBG(processedImageData['skinTone'])
+    
 
     return jsonify(processedImageData), 200
 

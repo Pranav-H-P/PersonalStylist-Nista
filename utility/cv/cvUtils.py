@@ -80,7 +80,7 @@ def _getBodyRatios(image): # returns shoulder to hip ratio and
 
 def _getFacialImageData(image): # returns age, gender, ethnicity and skin tone
     
-    result = DeepFace.analyze(image, actions=['age', 'gender', 'race'])[0]
+    result = DeepFace.analyze(image, actions = ['age', 'gender', 'race'], silent = True)[0]
     
     age = result['age']
     faceRegion = result['region']
@@ -92,7 +92,23 @@ def _getFacialImageData(image): # returns age, gender, ethnicity and skin tone
     else:
         gender = "Female"
 
-    return age, gender, ethnicity, "Light Brown"
+    x = faceRegion['x'] + 25
+    y = faceRegion['y'] + 25
+    w = faceRegion['w'] - 50
+    h = faceRegion['h'] - 50
+
+    # hsvImage = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+
+    face = image[y:y+h, x:x+w]
+    
+    
+
+    # Calculate the average color of the face region
+    avgColor = cv2.mean(face)
+    
+    avgColorString = "Red: " + str(round(avgColor[2], 2)) + ", Green: " + str(round(avgColor[1], 2)) + ", Blue: "+ str(round(avgColor[0], 2))
+
+    return age, gender, ethnicity, avgColorString
 
 
 
@@ -107,7 +123,7 @@ def getImageData(file): # to be accessed by the main script for
         return None
 
     shoulderToHip, hipToHeight = tup # tuple unpacking
-
+    
     otherDat = _getFacialImageData(img) # temporary variable again for failure checking
 
     if otherDat == None:
@@ -125,6 +141,19 @@ def getImageData(file): # to be accessed by the main script for
         "hHRI": hipToHeight
     }
 
+
 if __name__ == "__main__":
-    image = cv2.imread("experimentation/manStanding.jpg")
-    print(_getFacialImageData(image))
+    pass
+"""
+    image1 = cv2.imread("experimentation/face.jpg")
+    image2 = cv2.imread("experimentation/face.png")
+    image3 = cv2.imread("experimentation/face2.jpg")
+    image4 = cv2.imread("experimentation/face3.png")
+    image5 = cv2.imread("experimentation/face4.jpg")
+
+    print(_getFacialImageData(image1))
+    print(_getFacialImageData(image2))
+    print(_getFacialImageData(image3))
+    print(_getFacialImageData(image4))
+    print(_getFacialImageData(image5))
+"""
