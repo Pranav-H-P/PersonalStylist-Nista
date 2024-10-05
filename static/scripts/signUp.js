@@ -1,4 +1,3 @@
-const imageForm = document.getElementById('imgForm');
 const textForm = document.getElementById('textForm');
 
 const content = document.getElementById('mainContent');
@@ -14,6 +13,8 @@ const sHRIBox = document.getElementById("sHRIInput");
 const wHRIBox = document.getElementById("wHRIInput");
 const prefBox = document.getElementById("preferenceInput");
 
+const imgInput = document.getElementById("imgInput");
+const imgProcMsg = document.getElementById("imgProcessStatus");
 
 
 setTimeout( () => { // wait for bit for it to load
@@ -60,6 +61,13 @@ textForm.addEventListener('submit', e => { // to get submitted form data
 
     let userObj = {};
 
+    /*
+        TODO
+    ================
+    ADD LLM PROCESSING TO PROPERLY PROCESS AND FORMAT THIS DATA
+    SO THAT IT CAN BE FED INTO THE ML ALGORITHM PROPERLY
+    */ 
+
     userObj['user'] = {
         'name': userName,
         'age': userAge,
@@ -83,3 +91,50 @@ textForm.addEventListener('submit', e => { // to get submitted form data
    window.location.href = '/chat';
 })
 
+imgInput.addEventListener('change', async () => { // uploading image to server
+                                                  // will auto fill some fields based on response
+    
+    imgProcMsg.innerHTML = "Processing image..."
+    
+    const img=imgInput.files[0];
+
+    if (!img){
+        imgProcMsg.innerText = "Please select an image!";
+        return;
+    }
+
+    const imgForm = new FormData();
+    imgForm.append('image',img);
+
+    try {
+        const response = await fetch('/processImg',{
+            method: 'POST',
+            body: imgForm
+        });
+        
+        
+        if (response.ok){
+            const result = await response.json();
+
+            imgProcMsg.innerHTML = "Success!";
+
+            ageBox.value = result['age'];
+            genderBox.value = result['gender'];
+            ethnicityBox.value = result['ethnicity'];
+            skinToneBox.value = result['skinTone'];
+            sHRIBox.value = result['sHRI'];
+            wHRIBox.value = result['wHRI'];
+
+        }else{
+            const result = await response.json();
+            imgProcMsg.innerHTML = "Oops, "+ result.error;
+
+        }
+
+    } catch (error) {
+        imgProcMsg.innerHTML = "Oops, something went wrong.\nTry again!"
+    }
+
+
+
+})
