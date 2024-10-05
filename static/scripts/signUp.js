@@ -9,8 +9,8 @@ const genderBox = document.getElementById("genderInput");
 const ethnicityBox = document.getElementById("ethnicityInput");
 const skinToneBox = document.getElementById("skinInput");
 const heightBox = document.getElementById("heightInput");
-const sHRIBox = document.getElementById("sHRIInput");
-const wHRIBox = document.getElementById("wHRIInput");
+const sHRIBox = document.getElementById("sHRIInput"); // shoulder to hip ratio
+const hHRIBox = document.getElementById("hHRIInput"); // hip to height ratio
 const prefBox = document.getElementById("preferenceInput");
 
 const imgInput = document.getElementById("imgInput");
@@ -33,7 +33,7 @@ if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old dat
     skinToneBox.value = userObj['skinTone'];
     heightBox.value = userObj['height'];
     sHRIBox.value = userObj['sHRI'];
-    wHRIBox.value = userObj['wHRI'];
+    hHRIBox.value = userObj['hHRI'];
     prefBox.value = userObj['prefs'];
 
 }
@@ -55,8 +55,8 @@ textForm.addEventListener('submit', e => { // to get submitted form data
     const userEthnicity = data.get('ethnicityInput');
     const userSkinTone = data.get('skinInput');
     const userHeight = data.get('heightInput');
-    const userSHRI = data.get('sHRIInput'); // shoulder to height ratio
-    const userWHRI = data.get('wHRIInput'); // waist to height ratio
+    const userSHRI = data.get('sHRIInput'); // shoulder to hip ratio
+    const userhHRI = data.get('hHRIInput'); // hip to height ratio
     const userPrefs = data.get('preferenceInput');
 
     let userObj = {};
@@ -76,7 +76,7 @@ textForm.addEventListener('submit', e => { // to get submitted form data
         'skinTone': userSkinTone,
         'height': userHeight,
         'sHRI': userSHRI,
-        'wHRI': userWHRI,
+        'hHRI': userhHRI,
         'prefs': userPrefs,
         'chatSummary': "",
         'last10Outfits': [
@@ -95,7 +95,7 @@ imgInput.addEventListener('change', async () => { // uploading image to server
                                                   // will auto fill some fields based on response
     
     imgProcMsg.innerHTML = "Processing image..."
-    
+
     const img=imgInput.files[0];
 
     if (!img){
@@ -116,14 +116,14 @@ imgInput.addEventListener('change', async () => { // uploading image to server
         if (response.ok){
             const result = await response.json();
 
-            imgProcMsg.innerHTML = "Success!";
+            imgProcMsg.innerHTML = "Success! Please verify the data.";
 
             ageBox.value = result['age'];
             genderBox.value = result['gender'];
             ethnicityBox.value = result['ethnicity'];
             skinToneBox.value = result['skinTone'];
             sHRIBox.value = result['sHRI'];
-            wHRIBox.value = result['wHRI'];
+            hHRIBox.value = result['hHRI'];
 
         }else{
             const result = await response.json();

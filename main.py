@@ -1,7 +1,7 @@
-from flask import Flask, render_template, \
-                    session, request, jsonify
-import cv2
-import numpy as np
+from flask import Flask, render_template, request, jsonify
+from utility.cv import cvUtils
+
+
 
 app = Flask(__name__)
 
@@ -31,38 +31,29 @@ def chatPage():
 
 @app.route("/processImg", methods  = ["POST"]) # image processing
 def processImage():
+
     if 'image' not in request.files:
         return jsonify({
             'error': "Image wasn't recieved!"
             }), 400
     
-    image = request.files['image']
+    image = request.files['image'] # gets raw image from form data
 
     if image.filename == '':
         return jsonify({
             'error': "Image wasn't selected!"
             }), 400
 
-    # add image processing
-    imgBytes = np.frombuffer(image.read(), np.uint8)
 
-    imgArr = cv2.imdecode(imgBytes, cv2.IMREAD_COLOR)
+    # returns data from the image for pre-filling
+    processedImageData = cvUtils.getImageData(image) 
+    
+    if processedImageData == None: # if processing fails somehow
+        return jsonify({
+            'error': "The image is not clear! Please use good lighting"
+            }), 400
 
-    cv2.imshow('test',imgArr) # for verifying that it got uploaded
-                              # will remove later
-
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-    # dummy data, replace with actual data later
-    return jsonify({
-        "age": 20,
-        "gender": "Male",
-        "ethnicity": "Indian",
-        "skinTone": "Light brown",
-        "sHRI": 1.66,
-        "wHRI": 0.17
-    }), 200
+    return jsonify(processedImageData), 200
 
 
 if __name__ == "__main__":
