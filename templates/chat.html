@@ -4,8 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nista - Chat</title>
+    <link type="image/png" sizes="16x16" rel="icon" href="{{ url_for('static', filename='assets/bowTie.png') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/chat.css') }}" >
+    <script defer src="{{ url_for('static', filename='scripts/chat.js') }}" ></script>
+
 </head>
 <body>
-    <h1>Chat page</h1>
+
+
+    <div id="dummyHeader"> <!--A dummy div that occupies the same space as the header 
+        this lets the elements below it stay in its proper place
+        without the need for responsive margins (tedious to do)-->
+        <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
+
+    </div>
+
+    <header>
+        
+        <nav id="topNavBar">
+            <div id="topBarLeft">
+                <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
+                <p id="logoText" class="nistaFont">Nista</p>
+            </div>
+            
+        </nav>
+
+    </header>
+
+    <section id="mainContent">
+
+        <div id="textInputContainer">
+            <textarea id="textInput" placeholder="Talk to Nista"></textarea>
+            <button id="sendButton"></button>
+        </div>
+
+    </section>
+
+
+
 </body>
 </html>

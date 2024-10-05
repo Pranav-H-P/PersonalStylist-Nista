@@ -80,7 +80,21 @@ def _getBodyRatios(image): # returns shoulder to hip ratio and
 
 def _getFacialImageData(image): # returns age, gender, ethnicity and skin tone
     
-    result = DeepFace.analyze(image, actions=['age', 'gender', 'race'])
+    result = DeepFace.analyze(image, actions=['age', 'gender', 'race'])[0]
+    
+    age = result['age']
+    faceRegion = result['region']
+    gender = result['dominant_gender']
+    ethnicity = result['dominant_race']
+
+    if gender == "Man":
+        gender = "Male"
+    else:
+        gender = "Female"
+
+    return age, gender, ethnicity, "Light Brown"
+
+
 
 def getImageData(file): # to be accessed by the main script for
                         # processing and getting data from image
@@ -108,7 +122,7 @@ def getImageData(file): # to be accessed by the main script for
         "ethnicity": race,
         "skinTone": skinTone,
         "sHRI": shoulderToHip,
-        "wHRI": hipToHeight
+        "hHRI": hipToHeight
     }
 
 if __name__ == "__main__":
