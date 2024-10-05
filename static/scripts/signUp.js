@@ -12,7 +12,7 @@ const skinToneBox = document.getElementById("skinInput");
 const heightBox = document.getElementById("heightInput");
 const sHRIBox = document.getElementById("sHRIInput");
 const wHRIBox = document.getElementById("wHRIInput");
-const prefBox = document.getElementById("preferencesInput");
+const prefBox = document.getElementById("preferenceInput");
 
 
 
@@ -23,7 +23,7 @@ setTimeout( () => { // wait for bit for it to load
 
 if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old data
 
-    let userObj = JSON.parse(localStorage.getItem("user"));
+    let userObj = JSON.parse(localStorage.getItem("user"))['user'];
 
     nameBox.value = userObj['name'];
     ageBox.value = userObj['age'];
