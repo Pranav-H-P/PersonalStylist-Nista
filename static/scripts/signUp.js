@@ -19,6 +19,8 @@ const deleteProfile = document.getElementById("deleteProfile");
 
 const logoText = document.getElementById('logoText');
 
+const submitButton = document.getElementById("submitButton");
+
 if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old data
     
     deleteProfile.classList.remove('hide');
@@ -30,8 +32,8 @@ if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old dat
     ethnicityBox.value = userObj['ethnicity'];
     skinToneBox.value = userObj['skinTone'];
     heightBox.value = userObj['height'];
-    sHRIBox.value = userObj['sHRI'];
-    hHRIBox.value = userObj['hHRI'];
+    sHRIBox.value = userObj['sHR'];
+    hHRIBox.value = userObj['hHR'];
     prefBox.value = userObj['prefs'];
 
 }
@@ -42,7 +44,7 @@ setTimeout( () => { // wait for a bit for it to load
     deleteProfile.classList.remove('appear');
 }, 250);
 
-textForm.addEventListener('submit', e => { // to get submitted form data
+textForm.addEventListener('submit', async e => { // to get submitted form data
 
     
     e.preventDefault(); // stop form from refreshing page
@@ -60,15 +62,8 @@ textForm.addEventListener('submit', e => { // to get submitted form data
     const userSHRI = data.get('sHRIInput'); // shoulder to hip ratio
     const userhHRI = data.get('hHRIInput'); // hip to height ratio
     const userPrefs = data.get('preferenceInput');
-
+    
     let userObj = {};
-
-    /*
-        TODO
-    ================
-    ADD LLM PROCESSING TO PROPERLY PROCESS AND FORMAT THIS DATA
-    SO THAT IT CAN BE FED INTO THE ML ALGORITHM PROPERLY
-    */ 
 
     userObj['user'] = {
         'name': userName,
@@ -77,20 +72,69 @@ textForm.addEventListener('submit', e => { // to get submitted form data
         'ethnicity': userEthnicity,
         'skinTone': userSkinTone,
         'height': userHeight,
-        'sHRI': userSHRI,
-        'hHRI': userhHRI,
+        'sHR': userSHRI,
+        'hHR': userhHRI,
+        "bodyType": "",
         'prefs': userPrefs,
         'chatSummary': "",
         'last10Outfits': [
 
         ]
     }
+
+    if (heading.innerText==="Profile Updation"){ // if it's updation, dont delete old chat summary and outfits
+        
+        let oldObj = JSON.parse(localStorage.getItem("user"))['user'];
+
+        userObj['chatSummary'] = oldObj['chatSummary'];
+        userObj['last10Outfits'] = oldObj['last10Outfits'];
+
+    }
     
-    localStorage.setItem("user",JSON.stringify(userObj)) // save data to localStorage
+
+    const classificationData = { // data needed for body type classification
+        'sHR': userSHRI,
+        'hHR': userhHRI,
+        'gender': userGender
+    };
+
+    submitButton.value = "Saving...";
+    console.log(classificationData);
+    try {
+        const response = await fetch('/api/getBodyType',{ // api to classify body type
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(classificationData)
+        });
+        
+        
+        if (response.ok){
+            const result = await response.json();
+
+            submitButton.value = "Saving Sucessful!";
+
+            userObj['bodyType'] = result['bodyType'];
+
+            localStorage.setItem("user",JSON.stringify(userObj)) // save data to localStorage
                                                         // no data is permanently stored in backend
                                                         // its all stored in localStorage
     
-   window.location.href = '/chat';
+            window.location.href = '/chat';
+
+
+        }else{
+            const result = await response.json();
+            submitButton.value = result.error;
+
+        }
+
+    } catch (error) {
+        submitButton.value = "Something went wrong";
+    }
+
+
 });
 
 imgInput.addEventListener('change', async () => { // uploading image to server
@@ -124,8 +168,8 @@ imgInput.addEventListener('change', async () => { // uploading image to server
             genderBox.value = result['gender'];
             ethnicityBox.value = result['ethnicity'];
             skinToneBox.value = result['skinTone'];
-            sHRIBox.value = result['sHRI'];
-            hHRIBox.value = result['hHRI'];
+            sHRIBox.value = result['sHR'];
+            hHRIBox.value = result['hHR'];
 
         }else{
             const result = await response.json();

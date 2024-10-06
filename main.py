@@ -56,12 +56,32 @@ def processImage():
 
     # skin tone is in rgb value, make it into human readable values
     # classify skin tone using llm
-    
     processedImageData['skinTone'] = llmUtils.classifyRBG(processedImageData['skinTone'])
     
     print(processedImageData)
 
     return jsonify(processedImageData), 200
+
+@app.route("/api/getBodyType", methods = ['POST'])
+def getBodyType():
+
+    try:
+        
+        data = request.get_json()
+
+
+        bodyType = llmUtils.classifyBodyType(data['sHR'], data['hHR'], data['gender'])
+
+        obj = {
+            "bodyType": bodyType
+        }
+
+
+        return jsonify(obj), 200
+    
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Server Error!"}), 500
 
 
 @app.route("/api/getNistaResponse", methods = ['POST'])

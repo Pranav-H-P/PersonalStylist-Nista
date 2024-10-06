@@ -137,8 +137,8 @@ def getImageData(file): # to be accessed by the main script for
         "gender": gender,
         "ethnicity": race,
         "skinTone": skinTone,
-        "sHRI": shoulderToHip,
-        "hHRI": hipToHeight
+        "sHR": shoulderToHip,
+        "hHR": hipToHeight
     }
 
 

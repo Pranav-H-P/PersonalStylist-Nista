@@ -218,11 +218,8 @@ header{
     display: none;
 }
 
-ul{
-    overflow: hidden;
-}
-
-ol{
+li{
+    padding: 5%;
     overflow: hidden;
 }
 

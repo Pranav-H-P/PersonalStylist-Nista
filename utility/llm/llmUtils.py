@@ -40,6 +40,17 @@ def classifyRBG(rgb):
         return "Error"
 
 
+def classifyBodyType(sHR, hHR, gender): # takes shoulder to hip ratio, height to hip ratio and gender
+
+    template = llmTemplates.bodyTypeTemplate.format(SHR = sHR, HHR = hHR, gender = gender)
+
+    response = model.invoke(input = template, temperature = 0)
+
+    response = response.lower()
+    response = response.strip("\n ")
+
+    return response
+
 def chatReply(userData):
     
     userInput = userData['text']
@@ -57,4 +68,4 @@ def chatReply(userData):
 
 if __name__ == '__main__':
     while True:
-        print(classifyRBG(f"Red: 150.39, Green: 115.79, Blue: 101.87"))
+        print(classifyBodyType(1.7, 0.19, 'Male'))
