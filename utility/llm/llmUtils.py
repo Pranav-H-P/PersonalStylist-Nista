@@ -7,6 +7,7 @@ if __name__ == "__main__":
 else:
     
     from utility.llm import llmTemplates
+
    
 model = OllamaLLM(model = "gemma2:2b")
 
@@ -18,10 +19,11 @@ def classifyRBG(rgb):
     template = template.format(input = rgb)
 
     response = model.invoke(input = template, temperature = 0)
-    response = response.upper()
+    """response = response.upper()
 
-    response = response.replace("OUTPUT>","") # Output formatting
-    response = response.replace("\n","")
+    response = response.replace("\n","")"""
+    
+    response = response.strip("\n")
     response = response.strip(" ")
 
     respDict = { # directly asking it to list skin color names makes it refuse due to concerns of racism sometimes
@@ -36,6 +38,7 @@ def classifyRBG(rgb):
     if response in respDict:
         return respDict[response]
     else:
+        print(f"|{response}|")
         return "Error"
 
 def chatReply(userInput):
@@ -48,3 +51,7 @@ def chatReply(userInput):
     
     return response
 
+
+if __name__ == '__main__':
+    while True:
+        print(classifyRBG(f"Red: 150.39, Green: 115.79, Blue: 101.87"))

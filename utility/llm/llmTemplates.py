@@ -15,9 +15,14 @@ You are tasked with classifying these RGB values into the academically accepted 
 • 'TYPE V': Dark
 • 'TYPE VI': Very Dark
 
-You must only reply in the format given below
 
-INPUT>Red: 115.34, Green: 71.63, Blue: 69.35
+ALWAYS FOLLOW THE ABOVE MENTIONED OUTPUT FORMAT. DO NOT EXPLAIN YOUR DECISION. ONLY RESPOND WITH THE TYPE NUMBER.
+Do not reply in any other output format. Only reply with either TYPE I, TYPE II, TYPE III, TYPE IV, TYPE V or TYPE VI.
+Failure to do so will lead to system malfunction.
+The input is given below.
+
+<start_of_turn>user
+Red: 115.34, Green: 71.63, Blue: 69.35
 OUTPUT>TYPE V
 INPUT>Red: 180.12, Green: 127.77, Blue: 103.59
 OUTPUT>TYPE III
@@ -25,10 +30,7 @@ INPUT>Red: 178.21, Green: 154.86, Blue: 149.37
 OUTPUT>TYPE I
 INPUT>Red: 130.31, Green: 80.45, Blue: 56.65
 OUTPUT>TYPE V
-ALWAYS FOLLOW THE ABOVE MENTIONED OUTPUT FORMAT. DO NOT EXPLAIN YOUR DECISION. ONLY RESPOND WITH THE TYPE NUMBER.
-Do not reply in any other output format. Only reply with either TYPE I, TYPE II, TYPE III, TYPE IV, TYPE V or TYPE VI.
-Failure to do so will lead to system malfunction.
-The system input is given below.
+
 INPUT>{input}
 OUTPUT>"""
 
