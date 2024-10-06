@@ -44,8 +44,9 @@ html{
     background-position: center;
 }
 body{
-    min-width: 100%;
-    min-height: 100%;
+    
+    width: 100vw;
+    height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -89,6 +90,8 @@ header{
 }
 
 #mainContent{
+    flex-basis: 80%;
+    flex-grow: 1;
     box-shadow: 0px 1px 10px rgba(70, 70, 70, 0.5);
     padding-top: 1%;
     padding-bottom: 1%;
@@ -109,6 +112,7 @@ header{
     width: 95%;
     display: flex;
     margin-top: auto;
+    align-items: center;
 }
 
 #textInput{
@@ -146,8 +150,7 @@ header{
     flex-direction: column;
     min-width: 90vw;
     min-height: 60vh;
-    max-height: 60vh;
-    
+    max-height: auto;
     overflow-y: auto;
     scroll-behavior: smooth;
 }
@@ -174,7 +177,7 @@ header{
     text-align: left;
     background-color: var(--nistaLavender);
     width: fit-content;
-    max-width: 50%;
+    max-width: 60%;
     height: fit-content;
     border-radius: 10px;
     padding: 1%;
@@ -227,6 +230,9 @@ header{
     #chatContainer{
         min-height: 67vh;
     }
+    .message{
+        padding: 1.5%;
+    }
 }
 
 @media (max-width: 600px){
@@ -256,5 +262,8 @@ header{
     }
     #chatContainer{
         min-height: 70vh;
+    }
+    .message{
+        padding: 2%;
     }
 }
