@@ -21,10 +21,11 @@ const logoText = document.getElementById('logoText');
 
 const submitButton = document.getElementById("submitButton");
 
+
 if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old data
     
     deleteProfile.classList.remove('hide');
-    let userObj = JSON.parse(localStorage.getItem("user"))['user'];
+    let userObj = JSON.parse(localStorage.getItem("user"));
 
     nameBox.value = userObj['name'];
     ageBox.value = userObj['age'];
@@ -63,9 +64,7 @@ textForm.addEventListener('submit', async e => { // to get submitted form data
     const userhHRI = data.get('hHRIInput'); // hip to height ratio
     const userPrefs = data.get('preferenceInput');
     
-    let userObj = {};
-
-    userObj['user'] = {
+    userObj = {
         'name': userName,
         'age': userAge,
         'gender': userGender,
@@ -76,18 +75,18 @@ textForm.addEventListener('submit', async e => { // to get submitted form data
         'hHR': userhHRI,
         "bodyType": "",
         'prefs': userPrefs,
-        'chatSummary': "",
-        'last10Outfits': [
-
-        ]
+        'freshChats': [],
+        'toSummarize': [],
+        'summaryText': ""
     }
 
-    if (heading.innerText==="Profile Updation"){ // if it's updation, dont delete old chat summary and outfits
+    if (heading.innerText==="Profile Updation"){ // if it's updation, dont delete old chat data
         
-        let oldObj = JSON.parse(localStorage.getItem("user"))['user'];
+        let oldObj = JSON.parse(localStorage.getItem("user"));
 
-        userObj['chatSummary'] = oldObj['chatSummary'];
-        userObj['last10Outfits'] = oldObj['last10Outfits'];
+        userObj['freshChats'] = oldObj['freshChats'];
+        userObj['toSummarize'] = oldObj['toSummarize'];
+        userObj['summaryText'] = oldObj['summaryText'];
 
     }
     
@@ -99,7 +98,6 @@ textForm.addEventListener('submit', async e => { // to get submitted form data
     };
 
     submitButton.value = "Saving...";
-    console.log(classificationData);
     try {
         const response = await fetch('/api/getBodyType',{ // api to classify body type
             method: 'POST',

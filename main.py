@@ -84,6 +84,29 @@ def getBodyType():
         return jsonify({'error': "Server Error!"}), 500
 
 
+
+@app.route("/api/getSummary", methods = ['POST'])
+def getSummary():
+
+    try:
+        
+
+        data = request.get_json()
+
+        newSummary = llmUtils.summarize(data['toSummarize'], data['currentSummary'])
+        
+        obj = {
+            "summary": newSummary
+        }
+
+
+        return jsonify(obj), 200
+    
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Oops, Server Error! Please try again."}), 500
+
+
 @app.route("/api/getNistaResponse", methods = ['POST'])
 def getNistaResponse():
 
@@ -99,7 +122,8 @@ def getNistaResponse():
 
         # add images/references later in this too
         obj = {
-            "reply": nistaReply
+            "reply": nistaReply['htmlResponse'],
+            "rawReply": nistaReply['rawResponse']
         }
 
 

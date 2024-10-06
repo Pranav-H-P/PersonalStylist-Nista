@@ -1,5 +1,6 @@
 from langchain_ollama import OllamaLLM
-import markdown
+import markdown # for converting llm markdown output into html to directly insert into the dom
+from bs4 import BeautifulSoup # for converting html into raw text for saving in llm memory
 
 if __name__ == "__main__":
     
@@ -51,19 +52,78 @@ def classifyBodyType(sHR, hHR, gender): # takes shoulder to hip ratio, height to
 
     return response
 
-def chatReply(userData):
-    
-    userInput = userData['text']
+def summarize(newPoints, previousSummary):
 
-    template = llmTemplates.chatTemplate.format(userText = userInput)
+    arrPoints = ""
+
+    for session in newPoints: # session is [ humanMsg, AIMsg ]
+
+        response = markdown.markdown(response).lstrip('<p>').rstrip('</p>') # converts the markdown stuff llms give by default into html
+        response = response.replace("<script>"," ") # juuuust to make sure this isnt used for remote code execution by messing with the llm output
+
+        soup = BeautifulSoup(session[1], "html.parser")
+        rawResponse = soup.get_text() # gets raw text from the html formatting
+
+        arrPoints += "User: " + session[0] + "\n" + "Stylist: " + rawResponse
+
+    if len(previousSummary.strip()) != 0:
+        previousSummary = "\nThe summary of the previous conversations is given below\n" + previousSummary
+
+    template = llmTemplates.summaryTemplate.format(previousSummary = previousSummary, arrayPoints = arrPoints)
+
+    response = model.invoke(input = template, temperature = 0)
+
+    return response
+
+def chatReply(userData):
+    print(userData)
+    freshChats = userData['freshChats']
+    toSummarize = userData['toSummarize']
+    summary = userData['summaryText']
+
+    prevText = "" # will store previous conversation in gemma2 instruction tags
+
+    if len(summary.strip()) != 0:
+        summary = "\n" + "The summary of the previous conversations is given below\n"+summary
+
+    for arr in toSummarize:
+        prevText += "<start_of_turn>user\n" # enclosing user message
+        prevText += arr[0] + "<end_of_turn>\n"
+        
+        prevText += "<start_of_turn>model\n" # enclosing AI message
+        prevText += arr[1] + "<end_of_turn>\n"
+    
+    for arr in freshChats:
+        prevText += "<start_of_turn>user\n" # enclosing user message
+        prevText += arr[0] + "<end_of_turn>\n"
+        
+        prevText += "<start_of_turn>model\n" # enclosing AI message
+        prevText += arr[1] + "<end_of_turn>\n"
+
+    template = llmTemplates.chatTemplate.format(userText = userData['text'],
+                                                name = userData['name'],
+                                                age = userData['age'],
+                                                gender = userData['gender'],
+                                                ethnicity = userData['ethnicity'],
+                                                skinTone = userData['skinTone'],
+                                                height = userData['height'],
+                                                bodyType = userData['bodyType'],
+                                                preferences = userData['prefs'],
+                                                previousConversation = prevText,
+                                                summary = summary
+                                                )
 
     response = model.invoke(input = template)
+
+    mdResponse = response #markdown response for later llm reference
 
     response = markdown.markdown(response).lstrip('<p>').rstrip('</p>') # converts the markdown stuff llms give by default into html
     response = response.replace("<script>"," ") # juuuust to make sure this isnt used for remote code execution by messing with the llm output
     
-    
-    return response
+    return {
+        "htmlResponse": response, # displayed on screen
+        "rawResponse": mdResponse # stored in history
+        }
 
 
 if __name__ == '__main__':
