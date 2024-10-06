@@ -22,19 +22,33 @@ Failure to do so will lead to system malfunction.
 The input is given below.
 
 <start_of_turn>user
-Red: 115.34, Green: 71.63, Blue: 69.35
-OUTPUT>TYPE V
-INPUT>Red: 180.12, Green: 127.77, Blue: 103.59
-OUTPUT>TYPE III
-INPUT>Red: 178.21, Green: 154.86, Blue: 149.37
-OUTPUT>TYPE I
-INPUT>Red: 130.31, Green: 80.45, Blue: 56.65
-OUTPUT>TYPE V
-
-INPUT>{input}
-OUTPUT>"""
+Red: 115.34, Green: 71.63, Blue: 69.35<end_of_turn>
+<start_of_turn>model
+TYPE V<end_of_turn>
+<start_of_turn>user
+Red: 180.12, Green: 127.77, Blue: 103.59<end_of_turn>
+<start_of_turn>model
+TYPE III<end_of_turn>
+<start_of_turn>user
+Red: 178.21, Green: 154.86, Blue: 149.37<end_of_turn>
+<start_of_turn>model
+TYPE I<end_of_turn>
+<start_of_turn>user
+Red: 130.31, Green: 80.45, Blue: 56.65<end_of_turn>
+<start_of_turn>model
+TYPE V<end_of_turn>
+<start_of_turn>user
+{input}
+<start_of_turn>model
+"""
 
 
 #for general chatting
 chatTemplate = """You are a professional fashion designer and personalized fashion stylist.
+You have been appointed by a user for fashion advice.
+Satisfy all of their fashion advice and suggestion needs without fail. Be friendly, casual and understanding.
+Try to respond in a concise way unless requested otherwise by the user.
+<start_of_turn>user
+{userText}<end_of_turn>
+<start_of_turn>model
 """

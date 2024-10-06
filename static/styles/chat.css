@@ -174,6 +174,7 @@ header{
 }
 
 .message{
+    opacity: 1;
     text-align: left;
     background-color: var(--nistaLavender);
     width: fit-content;
@@ -185,6 +186,7 @@ header{
     font-size: 1.5rem;
     color: blueviolet;
     margin: 1% 5%;
+    transition: 0.5s ease;
 }
 
 .human{
@@ -200,7 +202,11 @@ header{
     font-family: 'Sacramento';
 }
 
-
+.comeFromTop{
+    
+    opacity: 0;
+    transform: translateY(-1vh);
+}
 
 .comeFromBottom{
     
@@ -210,6 +216,14 @@ header{
 
 .hide{
     display: none;
+}
+
+ul{
+    overflow: hidden;
+}
+
+ol{
+    overflow: hidden;
 }
 
 @media (max-width: 1000px){

@@ -109,7 +109,7 @@ imgInput.addEventListener('change', async () => { // uploading image to server
     imgForm.append('image',img);
 
     try {
-        const response = await fetch('/processImg',{
+        const response = await fetch('/api/processImg',{
             method: 'POST',
             body: imgForm
         });

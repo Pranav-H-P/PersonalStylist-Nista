@@ -29,7 +29,7 @@ def chatPage():
     return render_template("chat.html")
 
 
-@app.route("/processImg", methods  = ["POST"]) # image processing
+@app.route("/api/processImg", methods  = ["POST"]) # image processing
 def processImage():
 
     if 'image' not in request.files:
@@ -64,17 +64,33 @@ def processImage():
     return jsonify(processedImageData), 200
 
 
-@app.route("/latestTrends")
-def getLatestTrends():
-    
-    with open('latestTrends.txt', 'r') as trendsFile: # to be updated by us ( pErSoNaLlY CuRaTeD )
-        content = ''.join(trendsFile.readlines())
-    
-    obj = {
-        "trends": content
-    }
+@app.route("/api/getNistaResponse", methods = ['POST'])
+def getNistaResponse():
 
-    return jsonify(obj), 200
+    try:
+        with open('latestTrends.txt', 'r') as trendsFile: # to be updated by us ( pErSoNaLlY CuRaTeD )
+            trends = ''.join(trendsFile.readlines())
+
+        data = request.get_json()
+
+        data['latestTrends'] = trends
+
+        nistaReply = llmUtils.chatReply(data)
+
+        # add images/references later in this too
+        obj = {
+            "reply": nistaReply
+        }
+
+
+        return jsonify(obj), 200
+    
+    except Exception as e:
+        print(e)
+        return jsonify({'error': "Oops, Server Error! Please try again."}), 500
+
+
 
 if __name__ == "__main__":
     app.run(debug = True, host = "127.0.0.1", port= 4321)
+
