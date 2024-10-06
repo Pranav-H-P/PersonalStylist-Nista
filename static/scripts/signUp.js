@@ -15,15 +15,13 @@ const prefBox = document.getElementById("preferenceInput");
 
 const imgInput = document.getElementById("imgInput");
 const imgProcMsg = document.getElementById("imgProcessStatus");
+const deleteProfile = document.getElementById("deleteProfile");
 
-
-setTimeout( () => { // wait for bit for it to load
-        content.classList.remove('comeFromLeft'); // trigger css transition effect
-}, 250)
-
+const logoText = document.getElementById('logoText');
 
 if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old data
-
+    
+    deleteProfile.classList.remove('hide');
     let userObj = JSON.parse(localStorage.getItem("user"))['user'];
 
     nameBox.value = userObj['name'];
@@ -38,7 +36,11 @@ if (heading.innerText==="Profile Updation"){ // pre-fill text boxes with old dat
 
 }
 
-
+setTimeout( () => { // wait for a bit for it to load
+    content.classList.remove('comeFromLeft'); // trigger css transition effect
+    
+    deleteProfile.classList.remove('appear');
+}, 250);
 
 textForm.addEventListener('submit', e => { // to get submitted form data
 
@@ -89,12 +91,12 @@ textForm.addEventListener('submit', e => { // to get submitted form data
                                                         // its all stored in localStorage
     
    window.location.href = '/chat';
-})
+});
 
 imgInput.addEventListener('change', async () => { // uploading image to server
                                                   // will auto fill some fields based on response
     
-    imgProcMsg.innerHTML = "Processing image..."
+    imgProcMsg.innerHTML = "Processing image...\nFeel free to fill up your name,\nheight and clothing preferences"
 
     const img=imgInput.files[0];
 
@@ -137,4 +139,15 @@ imgInput.addEventListener('change', async () => { // uploading image to server
 
 
 
-})
+});
+
+deleteProfile.addEventListener('click', () => {
+
+    localStorage.removeItem('user');
+    window.location.href = "/";
+
+});
+
+logoText.addEventListener('click', () => {
+    window.location.href = "/";
+});

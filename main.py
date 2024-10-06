@@ -5,8 +5,8 @@ from utility.llm import llmUtils
 
 app = Flask(__name__)
 
-keys = open(".keys") # reading secret key
-app.secret_key = keys.readline().strip()
+with open(".keys") as keys: # reading secret key
+    app.secret_key = keys.readline().strip()
 
 
 @app.route("/") # Home page
@@ -59,9 +59,22 @@ def processImage():
     
     processedImageData['skinTone'] = llmUtils.classifyRBG(processedImageData['skinTone'])
     
+    print(processedImageData)
 
     return jsonify(processedImageData), 200
 
+
+@app.route("/latestTrends")
+def getLatestTrends():
+    
+    with open('latestTrends.txt', 'r') as trendsFile: # to be updated by us ( pErSoNaLlY CuRaTeD )
+        content = ''.join(trendsFile.readlines())
+    
+    obj = {
+        "trends": content
+    }
+
+    return jsonify(obj), 200
 
 if __name__ == "__main__":
     app.run(debug = True, host = "127.0.0.1", port= 4321)

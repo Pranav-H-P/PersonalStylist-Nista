@@ -27,6 +27,9 @@
                 <img src="{{ url_for('static', filename='assets/bowTie.png') }}">
                 <p id="logoText" class="nistaFont">Nista</p>
             </div>
+            <div id="topBarRight">
+                <button id="deleteProfile" class="hide appear">Delete Profile</button>
+            </div>
             
         </nav>
 
@@ -62,7 +65,7 @@
             <label for="skinInput" class="formLabel">Skin tone</label>
             <input type="text" class="inputBox" name="skinInput" id="skinInput" required>
 
-            <label for="heightInput" class="formLabel">Height</label>
+            <label for="heightInput" class="formLabel">Height (cm)</label>
             <input type="number" class="inputBox" name="heightInput" step="0.1" id="heightInput" required>
 
             <label for="sHRIInput" class="formLabel">Shoulder to Hip Ratio</label>

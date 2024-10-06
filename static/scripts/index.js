@@ -6,18 +6,18 @@ const centerCaption = document.getElementById("captionText");
 
 const contentLinkContainer = document.getElementById("contentLinkContainer");
 
+const updateProfileButton = document.getElementById("updateProfile");
 
 
 let userData = JSON.parse(localStorage.getItem("user")) // check if this exists in localStorage
                                                         // (if user has signed up already)
-
-
 if (userData === null){ // check if user has registered
 
     signUpLink.classList.remove("hide");
 
 }else{
 
+    updateProfileButton.classList.remove("hide");
     chatLink.classList.remove("hide");
 
 }
@@ -34,5 +34,15 @@ setTimeout( () => {
 
 setTimeout( () => {
     contentLinkContainer.classList.remove("comeFromBottom");
-
+    updateProfileButton.classList.remove("appear");
 }, 2500);
+
+
+
+
+
+updateProfileButton.addEventListener('click', () => {
+
+    window.location.href = '/updateProfile';
+
+});

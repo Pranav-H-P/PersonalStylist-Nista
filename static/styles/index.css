@@ -73,6 +73,32 @@ header{
     margin-left: 2vw;
 }
 
+#updateProfile{
+    background-color: var(--nistaLavender);
+    border-radius: 10px;
+    padding: 0.1%;
+    font-size: 1rem;
+    color: blueviolet;
+    transition: 1s ease;
+}
+#updateProfile:hover{
+    cursor: pointer;
+    background-color: var(--nistaLavenderHover)
+    
+}
+#updateProfile:active{
+    cursor: pointer;
+    background-color: var(--nistaLavenderActive)
+    
+}
+
+#topBarRight{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 2%;
+}
+
 #logoText{
     padding-top: 5%;
     margin-left: 2vw;
@@ -123,11 +149,16 @@ header{
 }
 
 a{
+    border: black solid 2px;
     background-color: var(--nistaLavender);
     border-radius: 10px;
     padding: 1%;
     font-size: 2rem;
     color: blueviolet;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #dummyHeader{
@@ -152,6 +183,9 @@ a{
     transform: translateY(5vh);
 }
 
+.appear{
+    opacity: 0;
+}
 
 a:link{
     text-decoration: none;
@@ -193,5 +227,6 @@ a:active{
     }
     a{
         padding: 2%;
+        font-size: 1.5rem;
     }
 }
