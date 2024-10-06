@@ -17,11 +17,15 @@ logoText.addEventListener('click', () => {
 
 textBox.addEventListener('keydown', e => {
     
-    if (e.key === 'Enter') {
-      
-      e.preventDefault(); // Prevent the default behavior of the Enter key (next line)
-      
-      sendButton.click();
+    const userAgent = navigator.userAgent;
+    if (!userAgent.match(/Mobile|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i)){ // exclude mobile users from this
+
+        if (e.key === 'Enter' && !e.shiftKey ) { // Enter key sends message on PC, shift+enter creates new line
+        
+        e.preventDefault(); // Prevent the default behavior of the Enter key (new line)
+        
+        sendButton.click();
+        }
     }
 });
   

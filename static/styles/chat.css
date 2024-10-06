@@ -66,7 +66,7 @@ header{
     width: 100%;
     display: flex;
     background-color: white;
-    box-shadow: 0px 1px 10px rgb(70, 70, 70);
+    box-shadow: 0px 1px 10px rgb(70, 70, 70, 0.5);
 }
 #topBarLeft{
     display: flex;
@@ -89,6 +89,7 @@ header{
 }
 
 #mainContent{
+    box-shadow: 0px 1px 10px rgba(70, 70, 70, 0.5);
     padding-top: 1%;
     padding-bottom: 1%;
     background-color: rgba(254, 248, 255, 0.464);
@@ -104,6 +105,7 @@ header{
 }
 
 #textInputContainer{
+    flex-basis: 15%;
     width: 95%;
     display: flex;
     margin-top: auto;
@@ -120,6 +122,11 @@ header{
     border-radius: 10px;
     resize: none;
 }
+#textInput:focus{
+    
+    outline-color: blueviolet;
+}
+
 
 #sendButton{
     margin-top: auto;
@@ -131,6 +138,21 @@ header{
     max-width: 10vh;
     max-height: auto;
 }
+
+
+#chatContainer{
+    flex-basis: 85%;
+    display: flex;
+    flex-direction: column;
+    min-width: 90vw;
+    min-height: 60vh;
+    max-height: 60vh;
+    
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+
 
 #sendButton:hover{
     cursor: pointer;
@@ -146,6 +168,29 @@ header{
     width: 100%;
     max-width: 60%;
     height: auto;
+}
+
+.message{
+    text-align: left;
+    background-color: var(--nistaLavender);
+    width: fit-content;
+    max-width: 50%;
+    height: fit-content;
+    border-radius: 10px;
+    padding: 1%;
+    border: none;
+    font-size: 1.5rem;
+    color: blueviolet;
+    margin: 1% 5%;
+}
+
+.human{
+    
+    margin-left: auto;
+}
+
+.ai{
+    margin-right: auto;
 }
 
 .nistaFont{
@@ -169,12 +214,18 @@ header{
         margin-top: 2%;
         min-height: 76vh;
     }
+    #chatContainer{
+        min-height: 64vh;
+    }
 }
 
 @media (max-width: 800px){
     #mainContent{
         margin-top: 3%;
         min-height: 76vh;
+    }
+    #chatContainer{
+        min-height: 67vh;
     }
 }
 
@@ -184,6 +235,7 @@ header{
         min-height: 78vh;
 
     }
+    
 }
 
 
@@ -201,5 +253,8 @@ header{
     #mainContent{
         margin-top: 10%;
 
+    }
+    #chatContainer{
+        min-height: 70vh;
     }
 }
