@@ -6,7 +6,7 @@ if __name__ == "__main__":
     import llmTemplates
 else:
     
-    import utility.ai.llmTemplates
+    import utility.llm.llmTemplates
    
 model = OllamaLLM(model = "gemma2:2b")
 
