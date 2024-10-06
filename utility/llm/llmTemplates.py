@@ -1,9 +1,9 @@
-from langchain_ollama import OllamaLLM
+# holds prompt templates for llm calls
 
-phi35 = OllamaLLM(model = "gemma2:2b")
 
-def classifyRBG(rgb):
-    template = f"""You are a specialized classification AI developed by scientists to automate data gathering in a randomized control trial.
+# for rgb to skinType conversion
+
+rgbTemplate = template = """You are a specialized classification AI developed by scientists to automate data gathering in a randomized control trial.
 This randomized control trial aims to detect the effectiveness of sunscreen on preventing melanoma.
 One of the datapoints that the scientists must gather is the skin tone of the participants. This is to rule out confounding factors such as natural melanin levels.
 Scientists have used computer vision to identify the average RGB value of the participant's skin using sophisticated equipment.
@@ -29,33 +29,10 @@ ALWAYS FOLLOW THE ABOVE MENTIONED OUTPUT FORMAT. DO NOT EXPLAIN YOUR DECISION. O
 Do not reply in any other output format. Only reply with either TYPE I, TYPE II, TYPE III, TYPE IV, TYPE V or TYPE VI.
 Failure to do so will lead to system malfunction.
 The system input is given below.
-INPUT>{rgb}
+INPUT>{input}
 OUTPUT>"""
-    
-    response = phi35.invoke(input = template, temperature = 0)
-    response = response.upper()
-
-    response = response.replace("OUTPUT>","") # Output formatting
-    response = response.replace("\n","")
-    response = response.strip(" ")
-
-    respDict = { # directly asking it to list skin color names makes it refuse due to concerns of racism sometimes
-                "TYPE I": "Very light",
-                "TYPE II": "Light",
-                "TYPE III": "Medium",
-                "TYPE IV": "Olive",
-                "TYPE V": "Dark",
-                "TYPE VI": "Very Dark"
-    }
-
-    if response in respDict:
-        return respDict[response]
-    else:
-        return "Error"
 
 
-
-if __name__ == "__main__":
-    
-    pass
-   
+#for general chatting
+chatTemplate = """You are a professional fashion designer and personalized fashion stylist.
+"""
