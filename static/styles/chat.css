@@ -46,7 +46,8 @@ html{
 body{
     min-width: 100%;
     min-height: 100%;
-    
+    display: flex;
+    flex-direction: column;
 }
 
 header{
@@ -78,27 +79,127 @@ header{
     margin-left: 2vw;
     vertical-align: center;
     font-size: 4rem;
+    cursor: pointer;
 }
 
 #dummyHeader{
     opacity: 0;
     padding: 1%;
+    margin: 1%;
 }
+
+#mainContent{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    background-color: rgba(254, 248, 255, 0.464);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+    margin: 5%;
+    margin-top: 1%;
+    transition: 1s ease;
+    min-height: 74vh;
+    min-width: 90vw;
+}
+
+#textInputContainer{
+    width: 95%;
+    display: flex;
+    margin-top: auto;
+}
+
+#textInput{
+    max-height: 6vh;
+    flex-basis: 90%;
+    text-align: left;
+    font-size: 1.75rem;
+    margin: 1%;
+    padding: 1%;
+    border: none;
+    border-radius: 10px;
+    resize: none;
+}
+
+#sendButton{
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: var(--nistaLavender);
+    border: none;
+    border-radius: 50px;
+    padding: 1%;
+    max-width: 10vh;
+    max-height: auto;
+}
+
+#sendButton:hover{
+    cursor: pointer;
+    background-color: var(--nistaLavenderHover)
+    
+}
+#sendButton:active{
+    cursor: pointer;
+    background-color: var(--nistaLavenderActive)
+    
+}
+#sendIcon{
+    width: 100%;
+    max-width: 60%;
+    height: auto;
+}
+
+.nistaFont{
+    font-family: 'Sacramento';
+}
+
+
 
 .comeFromBottom{
     
     opacity: 0;
-    transform: translateY(2vh);
+    transform: translateY(1vh);
 }
 
-#mainContent{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 3%;
-    margin-top: 3%;
-    margin-bottom: 5%;
+.hide{
+    display: none;
 }
-#textInput{
-    resize: none;
+
+@media (max-width: 1000px){
+    #mainContent{
+        margin-top: 2%;
+        min-height: 76vh;
+    }
+}
+
+@media (max-width: 800px){
+    #mainContent{
+        margin-top: 3%;
+        min-height: 76vh;
+    }
+}
+
+@media (max-width: 600px){
+    #mainContent{
+        margin-top: 5%;
+        min-height: 78vh;
+
+    }
+}
+
+
+
+@media (max-width: 470px){
+    #mainContent{
+        margin-top: 8%;
+        min-height: 78vh;
+
+    }
+}
+
+
+@media (max-width: 400px){
+    #mainContent{
+        margin-top: 10%;
+
+    }
 }

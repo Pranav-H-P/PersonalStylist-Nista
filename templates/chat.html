@@ -31,11 +31,14 @@
 
     </header>
 
-    <section id="mainContent">
+    <section id="mainContent" class="comeFromBottom">
 
+        <div id="chatContainer">
+            
+        </div>
         <div id="textInputContainer">
             <textarea id="textInput" columns = "1" placeholder="Talk to Nista"></textarea>
-            <button id="sendButton"></button>
+            <button id="sendButton"><img id="sendIcon" src="{{ url_for('static', filename='assets/sendIcon.png') }}"></button>
         </div>
 
     </section>

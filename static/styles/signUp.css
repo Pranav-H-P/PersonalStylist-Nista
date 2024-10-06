@@ -69,6 +69,7 @@ header{
     margin-left: 2vw;
     vertical-align: center;
     font-size: 4rem;
+    cursor: pointer;
 }
 
 #mainContent{
@@ -161,7 +162,9 @@ header{
     display: none;
 }
 
-
+#preferenceInput{
+    resize: none;
+}
 .inputBox:focus{
     
     outline-color: blueviolet;
