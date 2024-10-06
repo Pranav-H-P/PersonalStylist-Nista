@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from utility.cv import cvUtils
-from utility.ai import llmUtils
+from utility.llm import llmUtils
 
 
 app = Flask(__name__)
