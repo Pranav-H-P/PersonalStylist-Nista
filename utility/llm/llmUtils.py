@@ -100,6 +100,8 @@ def chatReply(userData):
         prevText += "<start_of_turn>model\n" # enclosing AI message
         prevText += arr[1] + "<end_of_turn>\n"
 
+
+
     template = llmTemplates.chatTemplate.format(userText = userData['text'],
                                                 name = userData['name'],
                                                 age = userData['age'],
