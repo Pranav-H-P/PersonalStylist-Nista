@@ -80,8 +80,12 @@ def chatReply(userData):
     freshChats = userData['freshChats']
     toSummarize = userData['toSummarize']
     summary = userData['summaryText']
+    latestTrends = userData['latestTrends'].strip(" ")
 
     prevText = "" # will store previous conversation in gemma2 instruction tags
+
+    if latestTrends != " ":
+        latestTrends = "Here is a curated list of recent trends in fashion\n" + latestTrends + "\n"
 
     if len(summary.strip()) != 0:
         summary = "\n" + "The summary of the previous conversations is given below\n"+summary
@@ -112,7 +116,8 @@ def chatReply(userData):
                                                 bodyType = userData['bodyType'],
                                                 preferences = userData['prefs'],
                                                 previousConversation = prevText,
-                                                summary = summary
+                                                summary = summary,
+                                                latestTrends = latestTrends
                                                 )
 
     response = model.invoke(input = template)

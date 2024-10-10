@@ -100,6 +100,7 @@ Body type: {bodyType}
 Personal preferences: {preferences}
 Always keep this data in mind while recommending outfits or providing fashion advice. The user will deeply appreciate it.
 Always personalize your responses based on the user.
+{latestTrends}
 {summary}
 {previousConversation}
 <start_of_turn>user
