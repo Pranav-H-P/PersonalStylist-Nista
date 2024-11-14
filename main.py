@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from utility.cv import cvUtils
 from utility.llm import llmUtils
-
+import time
 
 app = Flask(__name__)
 
@@ -56,7 +56,10 @@ def processImage():
 
     # skin tone is in rgb value, make it into human readable values
     # classify skin tone using llm
+
+    print("called at:",time.time())
     processedImageData['skinTone'] = llmUtils.classifyRBG(processedImageData['skinTone'])
+    print("returned at:",time.time())
     
     print(processedImageData)
 
@@ -69,14 +72,14 @@ def getBodyType():
         
         data = request.get_json()
 
-
+        print("called at:",time.time())
         bodyType = llmUtils.classifyBodyType(data['sHR'], data['hHR'], data['gender'])
 
         obj = {
             "bodyType": bodyType
         }
 
-
+        print("returned at:",time.time())
         return jsonify(obj), 200
     
     except Exception as e:
@@ -118,6 +121,7 @@ def getNistaResponse():
 
         data['latestTrends'] = trends
 
+        print("called at:",time.time())
         nistaReply = llmUtils.chatReply(data)
 
         # add images/references later in this too
@@ -126,7 +130,7 @@ def getNistaResponse():
             "rawReply": nistaReply['rawResponse']
         }
 
-
+        print("returned at:",time.time())
         return jsonify(obj), 200
     
     except Exception as e:
